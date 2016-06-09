@@ -1,13 +1,44 @@
 (function(){
-  // rawgit.com/zachsnow/taut/master/taut.js
-  alert('taut: loaded');
-  console.log('taut: loaded shim');
+  'use strict';
 
-  console.log('taut: loading styles');
+  // patch: 0x8032F => $.getScript('//localhost:4443/taut.js') ;
+
+  //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
+  // rawgit.com/zachsnow/taut/master/taut.js
+  var version = "0.0.1";
+  var stylesUrl = 'https://localhost:4443/taut.css';
+
+  /////////////////////////////////////////////////////////////////////
+  // Logging.
+  /////////////////////////////////////////////////////////////////////
+  var $log = $('<textarea id="taut" style="display: none;" readonly="readonly"></textarea>');
+  if(!$('#taut').length){
+    $('body').append($log);
+  }
+  var log = function(){
+    if(!$log){
+      return;
+    }
+    var text = $log.val();
+    text += 'taut: ' + _.map(arguments, function(arg){
+      if(_.isObject(arg)){
+        return JSON.stringify(arg);
+      }
+      return arg.toString();
+    }).join(', ') + '\n';
+    $log.val(text);
+    $log.scrollTop($log[0].scrollHeight);
+  };
+  log('loading version ' + version + '...');
+
+  /////////////////////////////////////////////////////////////////////
+  // Styles.
+  /////////////////////////////////////////////////////////////////////
+  log('loading styles...');
   $('<link/>', {
     rel: 'stylesheet',
     type: 'text/css',
-    href: '//rawgit.com/zachsnow/taut/master/taut.css'
+    href: stylesUrl
   }).appendTo('head');
 
   console.log('taut: binding shortcuts');

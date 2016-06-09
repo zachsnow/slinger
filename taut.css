@@ -1,3 +1,33 @@
+/* Taut console output. */
+#taut {
+    display: block !important;
+    position: absolute;
+    z-index: 100000;
+    left: 5px;
+    width: 210px;
+    height: 200px;
+    bottom: 5px;
+
+    color: white;
+    background: rgba(0,0,0,0.8);
+    padding: 2px;
+    font-size: 10px;
+
+    cursor: text;
+    white-space: pre;
+    overflow: auto;
+
+    border: 1px solid #eeeeee;
+}
+#taut:hover {
+    border: 1px solid white;
+    width: 500px;
+}
+#channels_scroller {
+    padding-bottom: 200px;
+}
+
+/* Custom CSS. */
 .message_icon {
     display: block !important;
 }
