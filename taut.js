@@ -41,36 +41,51 @@
     href: stylesUrl
   }).appendTo('head');
 
-  console.log('taut: binding shortcuts');
-  var leave = function(e){
+  /////////////////////////////////////////////////////////////////////
+  // Extra shortcuts.
+  /////////////////////////////////////////////////////////////////////
+  log('binding shortcuts...');
+
+  // leave: leave the current room; like /leave but tries to verify
+  // that you actually want to leave in some cases.
+  var leave = function(){
     var model = TS.shared.getActiveModelOb();
     if(!model){
+      log('leave: no active model');
       return;
     }
     if(model.is_im){
-      TS.client.ui.maybePromptForClosingIm(im.id)
+      log('leave: leaving current IM');
+      TS.client.ui.maybePromptForClosingIm(model.id)
     }
     else if(model.is_mpim){
+      log('leave: leaving current MPIM');
       TS.mpims.closeMpim(model.id);
     }
     else if(model.is_group){
+      log('leave: leaving current group');
       TS.client.ui.maybePromptForClosingGroup(model.id);
     }
     else if(model.is_channel){
+      log('leave: leaving current channel');
       TS.channels.leave(model.id);
     }
     else {
-      console.log('taut: unable to leave', model);
-      return;
+      log('leave: unknown model type', model);
     }
-
-    // Only prevent default if we handled it.
-    e.preventDefault();
   };
 
-  var startCall = function(e){
+  // Bind Command+W to leave.
+  TS.key_triggers[88] = {
+    func: leave,
+    no_shift: true
+  };
+
+  // startCall: try to start a call in your current room/channel/etc.
+  var startCall = function(){
     var model = TS.shared.getActiveModelOb();
     if(!model){
+      log('startCall: no active model');
       return;
     }
     var callInfo = {
@@ -78,19 +93,23 @@
       is_dm: model.is_im,
       is_mpdm: model.is_mpim
     };
+    log('startCall: launching...', callInfo)
     TS.utility.calls.launchVideoCall(callInfo);
-    e.preventDefault();
   };
 
-  $(window.document).keydown(function(e){
-    if(TS.utility.cmdKey(e) && e.which === 87){
-      leave(e);
-      return;
-    }
+  // Bind Command+P to startCall.
+  TS.key_triggers[80] = {
+    func: startCall,
+    no_shift: true
+  };
 
-    if(TS.utility.cmdKey(e) && e.which === 80){
-      startCall(e);
-      return;
-    }
-  });
+  log('loaded');
+
+  // Ok, we're done.
+  window.TSSSB.teamsDidLoad && window.TSSSB.teamsDidLoad();
+
+  // Export.
+  window.taut = {
+    log: log
+  };
 })();
