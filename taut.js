@@ -30,7 +30,7 @@
       is_dm: model.is_im,
       is_mpdm: model.is_mpim
     };
-    TS.utility.calls.launchVideoCall(call_info);
+    TS.utility.calls.launchVideoCall(callInfo);
     e.preventDefault();
   };
 
@@ -38,7 +38,7 @@
     if(TS.utility.cmdKey(e) && e.which === 87){
       leaveChannel(e);
     }
-    if(TS.utily.cmdKey(e) && e.which === 80){
+    if(TS.utility.cmdKey(e) && e.which === 80){
       startCall(e);
     }
   });
