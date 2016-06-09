@@ -19,10 +19,13 @@
     if(model.is_im){
       TS.client.ui.maybePromptForClosingIm(im.id)
     }
-    else if(model.is_group){
-      TS.groups.leave(model.id);
+    else if(model.is_mpim){
+      TS.mpims.closeMpim(model.id);
     }
-    else if(models.is_channel){
+    else if(model.is_group){
+      TS.client.ui.maybePromptForClosingGroup(model.id);
+    }
+    else if(model.is_channel){
       TS.channels.leave(model.id);
     }
     else {
