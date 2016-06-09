@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <h1>Taut</h1>
+  <h2>What?</h2>
+  <p>
+    User scripts and stylesheets in your Slack.app for OS X.
+  </p>
+  <h2>Why?</h2>
+  <p>
+    Because I got really annoyed that <code>&#8984; + W</code> closed the
+    entire Slack window instead of the current channel/group/message/whatever.
+  </p>
+  <h2>How?</h2>
+  <p>
+    Short and sweet:
+  </p>
+  <pre>
+    $ wget https://zachsnow.github.io/taut/patch.sh && bash patch.sh
+  </pre>
+  <p>
+    This patches your copy of <code>Slack.app</code> to load
+    <a href="https://zachsnow.github.io/taut/taut.js">taut.js</a> at load time.
+    This script subsequently loads <a href="https://zachsnow.github.io/taut/taut.css">taut.css</a>.
+  </p>
+  <p>
+    If you'd prefer, you can patch Slack to load whatever user script you'd
+    like. Simply pass the URL of the script as an argument:
+  </p>
+  <pre>
+    $ bash patch.sh https://someotherdomain.com/some-other-script.js
+  </pre>
+  <p>
+    <b>Caveats:</b> the script <i>must</i> be served over HTTPS, with
+    a CA-signed certificate (otherwise the underlying <code>WebView</code>
+    will not deign to load it). Furthermore the entire URL must be less than
+    <code>92</code> characters long, because I'm not actually a reverse engineer.
+  </p>
+</body>
+</html>
+
+[App didFinishLoading] calling TSSSB.teamsDidLoad()window.TSSSB ? TSSSB.teamsDidLoad() : '';
