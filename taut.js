@@ -11,19 +11,35 @@
   }).appendTo('head');
 
   console.log('taut: binding shortcuts');
-  var leaveChannel = function(){
+  var leaveChannel = function(e){
     var model = TS.shared.getActiveModelOb();
     if (!model){
       return;
     }
     TS.channels.leave(model.id);
     e.preventDefault();
-    e.stopPropagation();
+  };
+
+  var startCall = function(e){
+    var model = TS.shared.getActiveModelOb();
+    if (!model){
+      return;
+    }
+    var callInfo = {
+      id: model.id,
+      is_dm: model.is_im,
+      is_mpdm: model.is_mpim
+    };
+    TS.utility.calls.launchVideoCall(call_info);
+    e.preventDefault();
   };
 
   $(window.document).keydown(function(e){
-    if(TS.utility.cmdKey(e) && e.which == 87){
-      leaveChannel();
+    if(TS.utility.cmdKey(e) && e.which === 87){
+      leaveChannel(e);
+    }
+    if(TS.utily.cmdKey(e) && e.which === 80){
+      startCall(e);
     }
   });
 })();
