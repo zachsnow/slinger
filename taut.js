@@ -17,6 +17,7 @@
     }
     TS.channels.leave(model.id);
     e.preventDefault();
+    e.stopPropagation();
   };
 
   $(window.document).keydown(function(e){
