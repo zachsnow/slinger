@@ -1,5 +1,6 @@
 (function(){
   // rawgit.com/zachsnow/taut/master/taut.js
+  alert('taut: loaded');
   console.log('taut: loaded shim');
 
   console.log('taut: loading styles');
