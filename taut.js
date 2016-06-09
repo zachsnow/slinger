@@ -1,15 +1,15 @@
 (function(){
+  // rawgit.com/zachsnow/taut/master/taut.js
   console.log('taut: loaded shim');
 
   console.log('taut: loading styles');
   $('<link/>', {
     rel: 'stylesheet',
     type: 'text/css',
-    href: '//localhost:4443/taut.css'
+    href: '//rawgit.com/zachsnow/taut/master/taut.css'
   }).appendTo('head');
 
   console.log('taut: binding shortcuts');
-
   var leaveChannel = function(){
     var model = TS.shared.getActiveModelOb();
     if (!model){
