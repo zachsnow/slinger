@@ -11,18 +11,32 @@
   }).appendTo('head');
 
   console.log('taut: binding shortcuts');
-  var leaveChannel = function(e){
+  var leave = function(e){
     var model = TS.shared.getActiveModelOb();
-    if (!model){
+    if(!model){
       return;
     }
-    TS.channels.leave(model.id);
+    if(model.is_im){
+      TS.client.ui.maybePromptForClosingIm(im.id)
+    }
+    else if(model.is_group){
+      TS.groups.leave(model.id);
+    }
+    else if(models.is_channel){
+      TS.channels.leave(model.id);
+    }
+    else {
+      console.log('taut: unable to leave', model);
+      return;
+    }
+
+    // Only prevent default if we handled it.
     e.preventDefault();
   };
 
   var startCall = function(e){
     var model = TS.shared.getActiveModelOb();
-    if (!model){
+    if(!model){
       return;
     }
     var callInfo = {
@@ -36,10 +50,13 @@
 
   $(window.document).keydown(function(e){
     if(TS.utility.cmdKey(e) && e.which === 87){
-      leaveChannel(e);
+      leave(e);
+      return;
     }
+
     if(TS.utility.cmdKey(e) && e.which === 80){
       startCall(e);
+      return;
     }
   });
 })();
