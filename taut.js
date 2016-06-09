@@ -77,7 +77,7 @@
   };
 
   // Bind Command+W to leave.
-  TS.key_triggers[88] = {
+  TS.key_triggers[87] = {
     func: leave,
     no_shift: true
   };
