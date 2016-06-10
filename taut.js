@@ -9,8 +9,8 @@
     inApp = window.TSSSB.env.mac_ssb_version || window.TSSSB.env.win_ssb_version;
   }
 
-  //var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
-  var stylesUrl = '//localhost:4443/taut.css';
+  var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
+  //var stylesUrl = '//localhost:4443/taut.css';
 
   // Because sometimes things break and you can't tell if the script
   // is even loading in the Slack app.
@@ -34,7 +34,7 @@
   var $console = $taut.find('#console');
 
   var stringify = function(object){
-    if(_.isObject(object)){
+    if(_.isObject(object) && !(object instanceof Error)){
       return JSON.stringify(object);
     }
     return object.toString();
