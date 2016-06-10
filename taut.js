@@ -5,30 +5,91 @@
   // patch: 0x8032F => $.getScript('//rawgit.com/zachsnow/taut/master/taut.js') ;
   //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
   var version = "0.0.1";
-  var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
+  //var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
+  var stylesUrl = '//localhost:4443/taut.css';
 
   /////////////////////////////////////////////////////////////////////
   // Logging.
   /////////////////////////////////////////////////////////////////////
-  var $log = $('<textarea id="taut" style="display: none;" readonly="readonly"></textarea>');
-  if(!$('#taut').length){
-    $('body').append($log);
-  }
-  var log = function(){
-    if(!$log){
+  var $taut = $(
+    '<div id="taut" style="display: none;">' +
+    '<pre id="log"></pre>' +
+    '<input type="text" id="console">' +
+    '</div>'
+  );
+  $('#taut').remove();
+  $('body').append($taut);
+
+  var $log = $taut.find('#log');
+  var $console = $taut.find('#console');
+
+  var write = function(){
+    if(!$log.length){
       return;
     }
-    var text = $log.val();
-    text += 'taut: ' + _.map(arguments, function(arg){
+    var text = $log.text();
+    text += _.map(arguments, function(arg){
+      if(_.is)
       if(_.isObject(arg)){
         return JSON.stringify(arg);
       }
       return arg.toString();
-    }).join(', ') + '\n';
-    $log.val(text);
+    }).join(' ') + '\n';
+    $log.text(text);
     $log.scrollTop($log[0].scrollHeight);
   };
+  var log = function(){
+    var args = _.toArray(arguments);
+    args.unshift('taut:');
+    write.apply(this, args);
+  };
   log('loading version ' + version + '...');
+
+  /////////////////////////////////////////////////////////////////////
+  // Console.
+  /////////////////////////////////////////////////////////////////////
+  var commands = [];
+  var currentCommand = 0;
+  $console.on('keypress', function(e){
+    if(e.which === 13){
+      var command = $console.val();
+      $console.val('');
+      var result;
+      try {
+        result = eval(command);
+      }
+      catch(e){
+        result = e;
+      }
+      write('>', _.isUndefined(result) ? '' : result);
+      commands.push(command);
+      currentCommand = commands.length;
+      return;
+    }
+  });
+
+  $console.on('keydown', function(e){
+    if(e.which === 38){
+      currentCommand -= 1;
+      if(currentCommand < 0){
+        currentCommand = commands.length;
+      }
+      $console.val(commands[currentCommand] || '');
+      return;
+    }
+    if(e.which === 40){
+      currentCommand += 1;
+      if(currentCommand > commands.length){
+        currentCommand = 0;
+      }
+      $console.val(commands[currentCommand] || '');
+      return;
+    }
+    if(e.which === 27){
+      currentCommand = commands.length;
+      $console.val('');
+    }
+  });
 
   /////////////////////////////////////////////////////////////////////
   // Styles.
