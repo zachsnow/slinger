@@ -35,7 +35,7 @@
 
   var stringify = function(object){
     if(_.isObject(object) && !(object instanceof Error)){
-      return JSON.stringify(object);
+      return JSON.stringify(object, null, 2);
     }
     return object.toString();
   };
