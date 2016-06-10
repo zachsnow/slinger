@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  alert('taut');
 
   // patch: 0x8032F => $.getScript('//rawgit.com/zachsnow/taut/master/taut.js') ;
   //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
