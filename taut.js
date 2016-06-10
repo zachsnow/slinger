@@ -23,18 +23,19 @@
   var $log = $taut.find('#log');
   var $console = $taut.find('#console');
 
+  var stringify = function(object){
+    if(_.isObject(object)){
+      return JSON.stringify(object);
+    }
+    return object.toString();
+  }
+
   var write = function(){
     if(!$log.length){
       return;
     }
     var text = $log.text();
-    text += _.map(arguments, function(arg){
-      if(_.is)
-      if(_.isObject(arg)){
-        return JSON.stringify(arg);
-      }
-      return arg.toString();
-    }).join(' ') + '\n';
+    text += _.map(arguments, stringify).join(' ') + '\n';
     $log.text(text);
     $log.scrollTop($log[0].scrollHeight);
   };
