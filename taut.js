@@ -135,8 +135,9 @@
     }
   };
 
-  // Bind Command+W to leave.
-  TS.key_triggers[87] = {
+  // Bind Command+W to leave, except when we're not really
+  // in the Slack app.
+  TS.key_triggers[window.TSSSB.env.desktop_app_version ? 87 : 88] = {
     func: leave,
     no_shift: true
   };
