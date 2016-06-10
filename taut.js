@@ -3,9 +3,8 @@
 
   // patch: 0x8032F => $.getScript('//rawgit.com/zachsnow/taut/master/taut.js') ;
   //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
-  // rawgit.com/zachsnow/taut/master/taut.js
   var version = "0.0.1";
-  var stylesUrl = 'https://localhost:4443/taut.css';
+  var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.js';
 
   /////////////////////////////////////////////////////////////////////
   // Logging.
