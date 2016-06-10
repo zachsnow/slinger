@@ -24,7 +24,7 @@
   var $taut = $(
     '<div id="taut" style="display: none;">' +
     '<pre id="log"></pre>' +
-    '<input type="text" id="console">' +
+    '<input type="text" id="console" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">' +
     '</div>'
   );
   $('#taut').remove();
