@@ -9,6 +9,10 @@
     bottom: 5px;
     background: rgba(0,0,0,0.8);
     border: 1px solid #eeeeee;
+
+    color: white;
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+    font-size: 10px;
 }
 #taut:hover {
     border: 1px solid white;
@@ -16,10 +20,13 @@
 }
 
 #taut #log, #taut #console {
-    color: white;
-    padding: 2px;
-    font-size: 10px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
     background: transparent;
+
+    padding: 2px;
+
     left: 0;
     right: 0;
     margin: 0;
@@ -43,7 +50,23 @@
     border: none;
     border-top: 1px solid #eeeeee;
     border-radius: 0;
+    padding-left: 10px;
 }
+
+#taut::before {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    content: "> ";
+
+    position: absolute;
+    left: 2px;
+    bottom: 0;
+    height: 20px;
+    line-height: 20px;
+
+}
+
 #taut:hover #console {
     border-top: 1px solid #eeeeee;
 }
