@@ -1,12 +1,22 @@
 (function(){
   'use strict';
-  alert('taut');
-
   // patch: 0x8032F => $.getScript('//rawgit.com/zachsnow/taut/master/taut.js') ;
   //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
+  var debug = true;
   var version = "0.0.1";
-  var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
-  //var stylesUrl = '//localhost:4443/taut.css';
+  var inApp = false;
+  if(window.TSSSB && window.TSSSB.env){
+    inApp = window.TSSSB.env.mac_ssb_version || window.TSSSB.env.win_ssb_version;
+  }
+
+  //var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
+  var stylesUrl = '//localhost:4443/taut.css';
+
+  // Because sometimes things break and you can't tell if the script
+  // is even loading in the Slack app.
+  if(debug){
+    alert('taut version ' + version);
+  }
 
   /////////////////////////////////////////////////////////////////////
   // Logging.
@@ -28,7 +38,7 @@
       return JSON.stringify(object);
     }
     return object.toString();
-  }
+  };
 
   var write = function(){
     if(!$log.length){
@@ -39,11 +49,13 @@
     $log.text(text);
     $log.scrollTop($log[0].scrollHeight);
   };
+
   var log = function(){
     var args = _.toArray(arguments);
     args.unshift('taut:');
     write.apply(this, args);
   };
+
   log('loading version ' + version + '...');
 
   /////////////////////////////////////////////////////////////////////
@@ -138,7 +150,7 @@
 
   // Bind Command+W to leave, except when we're not really
   // in the Slack app.
-  TS.key_triggers[window.TSSSB.env.desktop_app_version ? 87 : 88] = {
+  TS.key_triggers[inApp ? 87 : 88] = {
     func: leave,
     no_shift: true
   };
