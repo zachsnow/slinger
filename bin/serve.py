@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+A tiny HTTPS server to make development more convenient.
+"""
 
 import BaseHTTPServer, SimpleHTTPServer
 import ssl
