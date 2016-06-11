@@ -1,0 +1,16 @@
+# Slack 2.0.2 (3412)
+
+# NOP NSLog call as it is unneeded.
+0x00024b54 0x488d3d5514070031c0e8509f0400 0x9090909090909090909090909090
+
+# Change string that is passed to `stringByEvaluatingJavaScriptFromString`.
+0x00024b86 0x488d1543140700 0x488d1523140700
+
+# Merge strings by replacing the separating \0 with a space.
+0x0008032e 0x00 0x20
+
+# Note the longer string length.
+0x00095fc8 0x33 0x5d
+
+# Update string.
+0x000802fb "[App didFinishLoading]" "$.getScript('https://rawgit.com/zachsnow/taut/master/taut.js');//"
