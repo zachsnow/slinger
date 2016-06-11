@@ -10,9 +10,7 @@ import argparse
 import re
 from string import Template
 
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
 
 class PatchError(Exception):
     pass
@@ -115,11 +113,11 @@ class Patch(object):
                 return
 
         if dry_run:
-            logger.info('0x%x: dry run, not writing %s' % (self.address, self.actual))
+            logger.debug('0x%x: dry run, not writing %s' % (self.address, self.actual))
         else:
             file.seek(self.address)
             file.write(self.actual.value)
-            logger.info('0x%x: wrote %s' % (self.address, self.actual))
+            logger.debug('0x%x: wrote %s' % (self.address, self.actual))
 
     @classmethod
     def parse(cls, line, context):
@@ -148,11 +146,14 @@ class Patcher(object):
 
     def _read_patches(self, patch_filename):
         patches = []
-        with open(patch_filename) as file:
-            for line in file.readlines():
-                patch = Patch.parse(line, self.context)
-                if patch:
-                    patches.append(patch)
+        try:
+            with open(patch_filename) as file:
+                for line in file.readlines():
+                    patch = Patch.parse(line, self.context)
+                    if patch:
+                        patches.append(patch)
+        except IOError:
+            raise PatchError('unable to open patch file %s' % patch_filename)
         return patches
 
     @classmethod
@@ -169,9 +170,12 @@ class Patcher(object):
         raise PatchError('could not backup')
 
     def patch(self, binary_filename, force=False, dry_run=False):
-        with open(binary_filename, 'r+b') as file:
-            for patch in self.patches:
-                patch.patch(file, force=force, dry_run=dry_run)
+        try:
+            with open(binary_filename, 'r+b') as file:
+                for patch in self.patches:
+                    patch.patch(file, force=force, dry_run=dry_run)
+        except IOError:
+            raise PatchError('unable to open binary file %s' % binary_filename)
 
     def __repr__(self):
         return "Patcher(%s)" % (
@@ -180,19 +184,25 @@ class Patcher(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--base', action='store', dest='base')
+    logging.basicConfig(stream=sys.stderr, format=u'patch.py: [%(levelname)s] %(message)s')
+    logger.setLevel(logging.INFO)
+
+    parser = argparse.ArgumentParser(prog="patch.py")
     parser.add_argument('--dry-run', action='store_true', dest='dry_run')
     parser.add_argument('--force', action='store_true', dest='force')
+    parser.add_argument('--verbose', action='store_true', dest='verbose')
     parser.add_argument('patch')
     parser.add_argument('input')
     parser.add_argument("context", nargs=argparse.REMAINDER)
     options = parser.parse_args()
 
+    if options.verbose:
+        logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+
     try:
         context = Context.parse(options.context)
         patcher = Patcher(options.patch, context=context)
-        logger.info("found %s patches" % len(patcher.patches))
+        logger.debug("found %s patches" % len(patcher.patches))
         if not options.dry_run:
             patcher.backup(options.input)
         patcher.patch(options.input, force=options.force, dry_run=options.dry_run)
