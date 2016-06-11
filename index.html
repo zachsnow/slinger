@@ -27,7 +27,7 @@
   </p>
 
   <h2>How?</h2>
-  <pre>$ wget https://zachsnow.github.io/taut/patch.sh && bash patch.sh</pre>
+  <pre>$ wget https://zachsnow.github.io/taut/taut.sh && bash taut.sh</pre>
   <p>
     This patches <code>Slack.app</code> to load
     <a href="https://zachsnow.github.io/taut/taut.js">taut.js</a> at launch.
@@ -36,12 +36,12 @@
     If you'd prefer, you can patch Slack to load whatever user script you'd
     like. Simply pass the URL of the script as an&nbsp;argument:
   </p>
-  <pre>$ bash patch.sh https://someotherdomain.com/some-other-script.js</pre>
+  <pre>$ bash taut.sh https://someotherdomain.com/some-other-script.js</pre>
   <p>
     <b>Caveats:</b> the script <i>must</i> be served over HTTPS, with
     a CA-signed certificate (otherwise the underlying <code>WebView</code>
     will not deign to load it). Furthermore the entire URL must be less than
-    <code>92</code> characters long, because I'm not actually a reverse&nbsp;engineer.
+    <code>80</code> characters long, because I'm not actually a reverse&nbsp;engineer.
   </p>
 
   <h2>No, But How?</h2>
