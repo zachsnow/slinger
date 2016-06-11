@@ -1,12 +1,99 @@
-body{
-    margin:40px auto;
-    max-width:650px;
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px 10px;
+    font-size: 16px;
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
     line-height:1.6;
-    font-size:18px;
-    color:#222222;
-    padding:0 10px;
+    color:white;
+
+    background: #78bbe7;
+    background: -moz-linear-gradient(top,  #78bbe7 0%, #2e6ba6 100%);
+    background: -webkit-linear-gradient(top,  #78bbe7 0%,#2e6ba6 100%);
+    background: linear-gradient(to bottom,  #78bbe7 0%,#2e6ba6 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78bbe7', endColorstr='#2e6ba6',GradientType=0 );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 h1, h2, h3{
     line-height:1.2;
+    margin: 1em 0 0.25em 0;
+}
+
+img {
+    width: 100%;
+}
+
+pre {
+    font-family: inherit;
+    background: white;
+    color: #202080;
+    padding: 10px;
+    font-size: 14px;
+}
+
+code {
+    display: inline-block;
+    padding: 0 5px;
+    border: 1px solid white;
+    border-radius: 2px;
+    background-color: rgba(255,255,255,0.25);
+}
+
+a, a:visited {
+    color: #2020ff;
+    text-decoration: none;
+}
+a:hover {
+    font-weight: bolder;
+}
+
+.ribbon {
+    position: absolute;
+    top: 42px;
+    width: 200px;
+    padding: 1px 0;
+    background: white;
+
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.ribbon.right{
+    right: -42px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.ribbon a {
+    color: #78bbe7;
+    font-weight: 900;
+    display: block;
+    padding: 1px 0;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+
+footer {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+}
+
+footer a, footer a:visited {
+    color: white;
+}
+footer img {
+    width: 30px;
+    vertical-align: middle;
 }

@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <h1>Taut</h1>
+  <div class="ribbon right">
+    <a href="https://github.com/zachsnow/taut">View on Github</a>
+  </div>
+
+  <header>
+    <h1>Taut</h1>
+  </header>
+
   <h2>What?</h2>
   <p>
-    User scripts and stylesheets in your Slack.app for OS X.
+    User scripts and stylesheets in Slack for OS X.
   </p>
+
+  <img src="slack.png" />
+
   <h2>Why?</h2>
   <p>
     Because I got really annoyed that <code>&#8984; + W</code> closed the
-    entire Slack window instead of the current channel/group/message/whatever.
+    entire Slack window instead of the current channel, group, or direct message.
+    Also for fun.
   </p>
+
   <h2>How?</h2>
+  <pre>$ wget https://zachsnow.github.io/taut/patch.sh && bash patch.sh</pre>
   <p>
-    Short and sweet:
-  </p>
-  <pre>
-    $ wget https://zachsnow.github.io/taut/patch.sh && bash patch.sh
-  </pre>
-  <p>
-    This patches your copy of <code>Slack.app</code> to load
-    <a href="https://zachsnow.github.io/taut/taut.js">taut.js</a> at load time.
-    This script subsequently loads <a href="https://zachsnow.github.io/taut/taut.css">taut.css</a>.
+    This patches <code>Slack.app</code> to load
+    <a href="https://zachsnow.github.io/taut/taut.js">taut.js</a> at launch.
   </p>
   <p>
     If you'd prefer, you can patch Slack to load whatever user script you'd
     like. Simply pass the URL of the script as an argument:
   </p>
-  <pre>
-    $ bash patch.sh https://someotherdomain.com/some-other-script.js
-  </pre>
+  <pre>$ bash patch.sh https://someotherdomain.com/some-other-script.js</pre>
   <p>
     <b>Caveats:</b> the script <i>must</i> be served over HTTPS, with
     a CA-signed certificate (otherwise the underlying <code>WebView</code>
     will not deign to load it). Furthermore the entire URL must be less than
     <code>92</code> characters long, because I'm not actually a reverse engineer.
   </p>
+
+  <h2>No, But How?</h2>
+  <p>
+    <code>Slack.app</code> is a <code>WebView</code> that loads
+    the Slack web application, so we just patch the binary to run some Javascript in
+    the context of the view. The binary already has multiple calls to a method for
+    doing just that: <code>[WebView stringByEvaluatingJavaScriptFromString]</code>.
+    Instead of shoe-horning in an additional call, we re-use an existing one, replacing
+    the intended string with the following:
+  </p>
+  <pre>$.getScript('https://zachsnow.github.io/taut/taut.js');</pre>
+  <p>
+    That script then loads additional styles, adds elements to the page, binds keyboard
+    shortcuts, and so on.
+  </p>
+
+  <footer>
+    By
+    <a href="http://zachsnow.com/">Zach Snow</a> +
+    <a href="https://fareharbor.com/">
+      FareHarbor
+      <img src="fh.png" />
+    </a>
+  </footer>
 </body>
 </html>
-
-[App didFinishLoading] calling TSSSB.teamsDidLoad()window.TSSSB ? TSSSB.teamsDidLoad() : '';
