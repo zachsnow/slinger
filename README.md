@@ -44,4 +44,4 @@ Then load the script into the webapp by opening your console and enter the follo
 
 Oh no, it doesn't work! Because `localhost.pem` is self-signed, you'll need
 to first load <https://localhost:4443/src/slinger.js> and tell your browser that it's safe.
-Probably you can add a certificate to your keychain or something, too
+Probably you can add a certificate to your keychain or something, too.
