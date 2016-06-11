@@ -14,12 +14,12 @@ echo "Slinger: downloading release ${RELEASE_URL}..."
 wget -q -O "${RELEASE_BUNDLE}" "${RELEASE_URL}"
 if [ $? -ne 0 ];
 then
-  echo "Error: chould not download latest release"
+  echo "Error: chould not download latest release."
   exit -1
 fi
 
 # Unzip.
-echo "Slinger: extracting release ${RELEASE_BUNDLE}"
+echo "Slinger: extracting release ${RELEASE_BUNDLE}..."
 SLINGER_DIR="slinger"
 mkdir -p ${SLINGER_DIR}
 tar -xzf "${RELEASE_BUNDLE}" -C "${SLINGER_DIR}" --strip-components 1
@@ -29,7 +29,7 @@ SLACK_MD5=`md5 -q ${SLACK}`
 PATCH="${SLINGER_DIR}/patches/${SLACK_MD5}.patch"
 if [ ! -f ${PATCH} ];
 then
-  echo "Error: no patch file for your version of Slack.app (md5: ${SLACK_MD5})"
+  echo "Error: no patch file for your version of Slack.app (md5: ${SLACK_MD5})."
   exit -1
 fi
 
@@ -38,7 +38,7 @@ echo "Slinger: patching..."
 "${SLINGER_DIR}/bin/patch.py" "${PATCH}" "${SLACK}" --dry-run
 if [ $? -ne 0 ];
 then
-  echo "Slinger: application of ${SLACK_MD5}.patch failed"
+  echo "Slinger: application of ${SLACK_MD5}.patch failed."
   exit -1
 fi
 
@@ -47,7 +47,8 @@ fi
 echo "Slinger: signing..."
 sudo codesign -f -s - "${SLACK}"
 if [ $? -ne 0 ];
-  echo "Slinger: re-signing Slack.app failed"
+then
+  echo "Slinger: re-signing Slack.app failed."
   exit -1
 fi
 
