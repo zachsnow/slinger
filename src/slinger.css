@@ -73,8 +73,3 @@
 #channels_scroller {
     padding-bottom: 200px;
 }
-
-/* Custom CSS. */
-.message_icon {
-    display: block !important;
-}
