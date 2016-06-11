@@ -5,23 +5,13 @@ User scripts and stylesheets for `Slack.app`.
 
 ## Installation
 
-0. Determine which patch to apply to `Slack.app`:
+    $ ./bin/patch.sh
 
-        $ MD5=`md5 -q /Applications/Slack.app/Contents/MacOS/Slack`
+This will patch `Slack.app` to load <https://zachsnow.github.io/slinger/slinger.js>;
+if you'd prefer you can patch it to load any script you'd like. Assuming it is hosted
+at `$URL`:
 
-0. Apply the patch:
-
-        $ ./bin/patch.py patches/$MD5.patch /Applications/Slack.app/Contents/MacOS/Slack
-
-  (If there is no such patch file, it means there isn't a patch for your
-  version of Slack; file an issue!)
-
-0. Re-sign `Slack.app`
-
-        $ codesign -f -s - /Applications/Slack.app/Contents/MacOS/Slack
-
-  (You might need to have Developer Tools installed or something to
-  do that, not sure).
+    $ ./bin/patch.sh $URL
 
 See <zachsnow.github.io/slinger/> for more information.
 
