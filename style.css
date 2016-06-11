@@ -4,7 +4,7 @@ html {
 
 body {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 620px;
     padding: 20px 10px;
     font-size: 15px;
     font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
@@ -44,7 +44,7 @@ code {
     border: 1px solid white;
     border-radius: 2px;
     background-color: rgba(255,255,255,0.2);
-    padding: 0 5px;
+    padding: 2px 5px;
     line-height: 1.2;
 }
 
