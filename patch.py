@@ -52,7 +52,7 @@ class Patch(object):
         self.expected = expected
         self.actual = actual
 
-    def patch(self, file, force=False):
+    def patch(self, file, force=False, dry_run=False):
         file.seek(self.address)
         expected = file.read(len(self.expected))
         if self.actual.value.startswith(expected):
@@ -70,9 +70,12 @@ class Patch(object):
             if not force:
                 return
 
-        file.seek(self.address)
-        file.write(self.actual.value)
-        logger.info('0x%x: wrote %s' % (self.address, self.actual))
+        if dry_run:
+            logger.info('0x%x: dry run, not writing %s' % (self.address, self.actual))
+        else:
+            file.seek(self.address)
+            file.write(self.actual.value)
+            logger.info('0x%x: wrote %s' % (self.address, self.actual))
 
     @classmethod
     def parse(self, line):
@@ -116,10 +119,10 @@ class Patcher(object):
                 return
         raise PatchError('could not backup')
 
-    def patch(self, binary_filename):
+    def patch(self, binary_filename, dry_run=False):
         with open(binary_filename, 'r+b') as file:
             for patch in self.patches:
-                patch.patch(file, force=self.force)
+                patch.patch(file, force=self.force, dry_run=dry_run)
 
     def __repr__(self):
         return "Patcher(0x%x, %s)" % (
@@ -137,12 +140,9 @@ if __name__ == '__main__':
     parser.add_argument('input')
     options = parser.parse_args()
     patcher = Patcher(options.patch, base=options.base, force=options.force)
-    if options.dry_run:
-        logger.info("found %s patches" % len(patcher.patches))
-        for patch in patcher.patches:
-            logger.info(patch)
-    else:
+    logger.info("found %s patches" % len(patcher.patches))
+    if not options.dry_run:
         patcher.backup(options.input)
-        patcher.patch(options.input)
-        logger.info('applied %s patches' % len(patcher.patches))
+    patcher.patch(options.input, dry_run=options.dry_run)
+    logger.info('applied %s patches' % len(patcher.patches))
     sys.exit(0)
