@@ -6,10 +6,11 @@
 # Change string that is passed to `stringByEvaluatingJavaScriptFromString`.
 0x00024b86 0x488d1543140700 0x488d1523140700
 
-# Merge strings by replacing the separating \0 with a space.
+# Merge strings by replacing the separating \0 with a space, in case the
+# URL doesn't reach it.
 0x0008032e 0x00 0x20
 
-# Note the longer string length.
+# Update to reflect the longer string length.
 0x00095fc8 0x33 0x5d
 
 # Update string.
