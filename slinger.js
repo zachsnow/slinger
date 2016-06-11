@@ -2,9 +2,10 @@
   'use strict';
 
   var debug = true;
-  var version = "0.0.1";
+  var version = "0.0.2";
 
-  //var stylesUrl = '//localhost:4443/src/slinger.css';
+  // NOTE: use the following in development:
+  // var stylesUrl = '//localhost:4443/src/slinger.css';
   var stylesUrl = '//zachsnow.github.io/slinger/slinger.css';
 
   // Because sometimes things break and you can't tell if the script
