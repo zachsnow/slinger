@@ -17,4 +17,4 @@ mkdir -p ${SLINGER_DIR}
 tar -xzf "${RELEASE_BUNDLE}" -C "${SLINGER_DIR}" --strip-components 1
 
 # Patch.
-bash "${SLINGER_DIR}/bin/patch.sh" "$1"
+bash "${SLINGER_DIR}/bin/patch.sh" $1
