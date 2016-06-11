@@ -3,3 +3,6 @@ client.js
 localhost.pem
 a.js
 .idea/
+build/
+Slack
+*.bak
