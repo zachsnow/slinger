@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 SLINGER_DIR=`dirname $(dirname $0)`
 
-# Allow forcing.
-if [[ "$1" == "--force" ]]; then
-  FORCE="$1"
-  shift
-fi
-
 # Make sure Slack is installed.
 SLACK="/Applications/Slack.app/Contents/MacOS/Slack"
 if [ ! -f ${SLACK} ];
@@ -29,11 +23,12 @@ PATCH="${SLINGER_DIR}/patches/7b0bc53e419c44c93a4b9ffee18e114e.patch"
 URL="https://zachsnow.github.io/slinger/slinger.js"
 if [[ "$1" != "" ]]; then
   URL="$1"
+  shift
 fi
 
 # Patch.
 echo "slinger: patching..."
-python "${SLINGER_DIR}/bin/patch.py" "${FORCE}" "${PATCH}" "${SLACK}" URL="${URL}"
+python "${SLINGER_DIR}/bin/patch.py" $@ "${PATCH}" "${SLACK}" URL="${URL}"
 if [ $? -ne 0 ];
 then
   echo "slinger: application of ${SLACK_MD5}.patch failed."
