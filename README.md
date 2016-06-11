@@ -7,18 +7,18 @@ User scripts and stylesheets for `Slack.app`.
 
 0. Determine which patch to apply to `Slack.app`:
 
-    $ MD5=`md5 -q /Applications/Slack.app/Contents/MacOS/Slack`
+        $ MD5=`md5 -q /Applications/Slack.app/Contents/MacOS/Slack`
 
 0. Apply the patch:
 
-    $ ./bin/patch.py patches/$MD5.patch
+        $ ./bin/patch.py patches/$MD5.patch
 
   (If there is no such patch file, it means there isn't a patch for your
   version of Slack; file an issue!)
 
 0. Re-sign `Slack.app`
 
-    $ codesign -f -s - /Applications/Slack.app/Contents/MacOS/Slack
+        $ codesign -f -s - /Applications/Slack.app/Contents/MacOS/Slack
 
   (You might need to have Developer Tools installed or something to
   do that, not sure).
