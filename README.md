@@ -11,7 +11,7 @@ User scripts and stylesheets for `Slack.app`.
 
 0. Apply the patch:
 
-        $ ./bin/patch.py patches/$MD5.patch
+        $ ./bin/patch.py patches/$MD5.patch /Applications/Slack.app/Contents/MacOS/Slack
 
   (If there is no such patch file, it means there isn't a patch for your
   version of Slack; file an issue!)
