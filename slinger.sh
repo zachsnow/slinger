@@ -17,4 +17,4 @@ mkdir -p ${SLINGER_DIR}
 tar -xzf "${RELEASE_BUNDLE}" -C "${SLINGER_DIR}" --strip-components 1
 
 # Patch.
-cd ${SLINGER_DIR} && bash patch.py
+bash "${SLINGER_DIR}/bin/patch.sh" "$1"
