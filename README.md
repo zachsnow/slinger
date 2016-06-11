@@ -17,7 +17,15 @@ See <zachsnow.github.io/slinger/> for more information.
 
 ## Use
 
-Start Slack. That's it.
+Start Slack. That's it :)
+
+The default user script, [slinger.js](https://zachsnow.github.io/slinger/slinger.js),
+does only a few things.
+
+* It binds two additional shortcuts: `Command + W`, to close the current channel,
+  and `Command + P`, to start a call in the current channel).
+* Creates a simple Javascript console that is running in the context of the Slack
+  `WebView`.
 
 ## Development
 
