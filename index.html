@@ -50,8 +50,8 @@
   <p>
     <code>Slack.app</code> is a <code>WebView</code> that loads
     the Slack web application, so we just patch the binary to run some Javascript in
-    the context of the view. The binary already has multiple calls to a method for
-    doing just that: <code>[WebView stringByEvaluatingJavaScriptFromString]</code>.
+    the context of the view. The binary already has multiple calls to a <code>WebView</code>
+    method for doing just that: <code>stringByEvaluatingJavaScriptFromString</code>.
     Instead of shoe-horning in an additional call, we re-use an existing one, replacing
     the intended string with the following:
   </p>
