@@ -1,5 +1,5 @@
-/* Taut console output. */
-#taut {
+/* slinger console output. */
+#slinger {
     display: block !important;
     position: absolute;
     z-index: 100000;
@@ -14,12 +14,12 @@
     font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
     font-size: 10px;
 }
-#taut:hover {
+#slinger:hover {
     border: 1px solid white;
     width: 500px;
 }
 
-#taut #log, #taut #console {
+#slinger #log, #slinger #console {
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -32,7 +32,7 @@
     margin: 0;
 }
 
-#taut #log {
+#slinger #log {
     position: absolute;
     top: 0;
     bottom: 20px;
@@ -42,7 +42,7 @@
     white-space: pre;
 }
 
-#taut #console {
+#slinger #console {
     position: absolute;
     bottom: 0;
     height: 20px;
@@ -53,7 +53,7 @@
     padding-left: 10px;
 }
 
-#taut::before {
+#slinger::before {
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -67,7 +67,7 @@
 
 }
 
-#taut:hover #console {
+#slinger:hover #console {
     border-top: 1px solid #eeeeee;
 }
 #channels_scroller {

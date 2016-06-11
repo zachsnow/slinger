@@ -3,35 +3,35 @@
 
   var debug = true;
   var version = "0.0.1";
+
+  //var stylesUrl = '//localhost:4443/src/slinger.css';
+  var stylesUrl = '//zachsnow.github.io/slinger/slinger.css';
+
+  // Because sometimes things break and you can't tell if the script
+  // is even loading in the Slack app.
+  if(debug){
+    alert('slinger version ' + version);
+  }
+
   var inApp = false;
   if(window.TSSSB && window.TSSSB.env){
     inApp = window.TSSSB.env.mac_ssb_version || window.TSSSB.env.win_ssb_version;
   }
 
-  // TODO: point this at `https://zachsnow.github.io/taut/taut.css`.
-  var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
-  //var stylesUrl = '//localhost:4443/taut.css';
-
-  // Because sometimes things break and you can't tell if the script
-  // is even loading in the Slack app.
-  if(debug){
-    alert('taut version ' + version);
-  }
-
   /////////////////////////////////////////////////////////////////////
   // Logging.
   /////////////////////////////////////////////////////////////////////
-  var $taut = $(
-    '<div id="taut" style="display: none;">' +
+  var $slinger = $(
+    '<div id="slinger" style="display: none;">' +
     '<pre id="log"></pre>' +
     '<input type="text" id="console" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">' +
     '</div>'
   );
-  $('#taut').remove();
-  $('body').append($taut);
+  $('#slinger').remove();
+  $('body').append($slinger);
 
-  var $log = $taut.find('#log');
-  var $console = $taut.find('#console');
+  var $log = $slinger.find('#log');
+  var $console = $slinger.find('#console');
 
   var stringify = function(object){
     if(_.isObject(object) && !(object instanceof Error)){
@@ -52,7 +52,7 @@
 
   var log = function(){
     var args = _.toArray(arguments);
-    args.unshift('taut:');
+    args.unshift('slinger:');
     write.apply(this, args);
   };
 
@@ -183,7 +183,7 @@
   window.TSSSB.teamsDidLoad && window.TSSSB.teamsDidLoad();
 
   // Export.
-  window.taut = {
+  window.slinger = {
     log: log
   };
 })();

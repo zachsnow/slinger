@@ -5,11 +5,11 @@
 </head>
 <body>
   <div class="ribbon right">
-    <a href="https://github.com/zachsnow/taut">View on Github</a>
+    <a href="https://github.com/zachsnow/slinger">View on Github</a>
   </div>
 
   <header>
-    <h1>Taut</h1>
+    <h1>Slinger &mdash; A Slack Thinger</h1>
   </header>
 
   <h2>What?</h2>
@@ -27,16 +27,16 @@
   </p>
 
   <h2>How?</h2>
-  <pre>$ wget https://zachsnow.github.io/taut/taut.sh && bash taut.sh</pre>
+  <pre>$ wget https://zachsnow.github.io/slinger/slinger.sh && bash slinger.sh</pre>
   <p>
     This patches <code>Slack.app</code> to load
-    <a href="https://zachsnow.github.io/taut/taut.js">taut.js</a> at launch.
+    <a href="https://zachsnow.github.io/slinger/slinger.js">slinger.js</a> at launch.
   </p>
   <p>
     If you'd prefer, you can patch Slack to load whatever user script you'd
     like. Simply pass the URL of the script as an&nbsp;argument:
   </p>
-  <pre>$ bash taut.sh https://someotherdomain.com/some-other-script.js</pre>
+  <pre>$ bash slinger.sh https://someotherdomain.com/some-other-script.js</pre>
   <p>
     <b>Caveats:</b> the script <i>must</i> be served over HTTPS, with
     a CA-signed certificate (otherwise the underlying <code>WebView</code>
@@ -53,7 +53,7 @@
     Instead of shoe-horning in an additional call, we re-use an existing one, replacing
     the intended string with the following:
   </p>
-  <pre>$.getScript('https://zachsnow.github.io/taut/taut.js');</pre>
+  <pre>$.getScript('https://zachsnow.github.io/slinger/slinger.js');</pre>
   <p>
     That script then loads additional styles, adds elements to the page, binds keyboard
     shortcuts, and so on.
