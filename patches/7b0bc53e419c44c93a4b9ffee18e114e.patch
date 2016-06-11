@@ -14,4 +14,4 @@
 0x00096fa8 0x33 0x5d
 
 # Update string.
-0x00080b5b "[App didFinishLoading]" "$.getScript('https://rawgit.com/zachsnow/taut/master/taut.js');//"
+0x00080b5b "[App didFinishLoading]" "$.getScript('https://zachsnow.github.io/slinger/slinger.js');//"

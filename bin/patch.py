@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+    patch.py - a simple Python script for applying binary patches.
+"""
 import logging
 logger = logging.getLogger(__name__)
 
@@ -42,6 +45,7 @@ class Value(object):
 
     def __str__(self):
         return self.render(self.value, self.type)
+
     def __len__(self):
         return len(self.value)
 
@@ -139,10 +143,14 @@ if __name__ == '__main__':
     parser.add_argument('patch')
     parser.add_argument('input')
     options = parser.parse_args()
-    patcher = Patcher(options.patch, base=options.base, force=options.force)
-    logger.info("found %s patches" % len(patcher.patches))
-    if not options.dry_run:
-        patcher.backup(options.input)
-    patcher.patch(options.input, dry_run=options.dry_run)
-    logger.info('applied %s patches' % len(patcher.patches))
-    sys.exit(0)
+    try:
+        patcher = Patcher(options.patch, base=options.base, force=options.force)
+        logger.info("found %s patches" % len(patcher.patches))
+        if not options.dry_run:
+            patcher.backup(options.input)
+        patcher.patch(options.input, dry_run=options.dry_run)
+        logger.info('applied %s patches' % len(patcher.patches))
+        sys.exit(0)
+    except PatchError as e:
+        logger.error('unable to patch: %s' % e)
+        sys.exit(-1)
