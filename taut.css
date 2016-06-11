@@ -1,0 +1,80 @@
+/* Taut console output. */
+#taut {
+    display: block !important;
+    position: absolute;
+    z-index: 100000;
+    left: 5px;
+    width: 210px;
+    height: 200px;
+    bottom: 5px;
+    background: rgba(0,0,0,0.8);
+    border: 1px solid #eeeeee;
+
+    color: white;
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+    font-size: 10px;
+}
+#taut:hover {
+    border: 1px solid white;
+    width: 500px;
+}
+
+#taut #log, #taut #console {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    background: transparent;
+
+    padding: 2px;
+
+    left: 0;
+    right: 0;
+    margin: 0;
+}
+
+#taut #log {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    line-height: 1.2;
+    border: none;
+    overflow: auto;
+    white-space: pre;
+}
+
+#taut #console {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    line-height: 20px;
+    border: none;
+    border-top: 1px solid #eeeeee;
+    border-radius: 0;
+    padding-left: 10px;
+}
+
+#taut::before {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    content: "> ";
+
+    position: absolute;
+    left: 2px;
+    bottom: 0;
+    height: 20px;
+    line-height: 20px;
+
+}
+
+#taut:hover #console {
+    border-top: 1px solid #eeeeee;
+}
+#channels_scroller {
+    padding-bottom: 200px;
+}
+
+/* Custom CSS. */
+.message_icon {
+    display: block !important;
+}
