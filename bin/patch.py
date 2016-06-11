@@ -30,6 +30,7 @@ class Context(object):
 
     @classmethod
     def parse(cls, input):
+        # Assumes `input` is a list of strings (straight from `argparse`).
         context = {}
         for part in input:
             part = part.strip()
@@ -187,6 +188,7 @@ if __name__ == '__main__':
     parser.add_argument('input')
     parser.add_argument("context", nargs=argparse.REMAINDER)
     options = parser.parse_args()
+
     try:
         context = Context.parse(options.context)
         patcher = Patcher(options.patch, context=context)
@@ -196,6 +198,7 @@ if __name__ == '__main__':
         patcher.patch(options.input, force=options.force, dry_run=options.dry_run)
         logger.info('applied %s patches' % len(patcher.patches))
         sys.exit(0)
+
     except PatchError as e:
         logger.error('unable to patch: %s' % e)
         sys.exit(-1)
