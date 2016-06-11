@@ -13,7 +13,7 @@ at `$URL`:
 
     $ ./bin/patch.sh $URL
 
-See <zachsnow.github.io/slinger/> for more information.
+See <https://zachsnow.github.io/slinger/> for more information.
 
 ## Use
 
@@ -23,8 +23,8 @@ The default user script, [slinger.js](https://zachsnow.github.io/slinger/slinger
 does only a few things.
 
 * It binds two additional shortcuts: `Command + W`, to close the current channel,
-  and `Command + P`, to start a call in the current channel).
-* Creates a simple Javascript console that is running in the context of the Slack
+  and `Command + P`, to start a call in the current channel.
+* It creates a simple Javascript console that is running in the context of the Slack
   `WebView`.
 
 ## Development
