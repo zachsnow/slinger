@@ -14,4 +14,4 @@
 0x00095fc8 0x33 0x5d
 
 # Update string.
-0x000802fb "[App didFinishLoading]" "$.getScript('https://zachsnow.github.io/slinger/slinger.js');//"
+0x000802fb "[App didFinishLoading]" "$.getScript('${URL}');//"
