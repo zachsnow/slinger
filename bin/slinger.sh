@@ -20,8 +20,9 @@ fi
 
 # Unzip.
 echo "Slinger: extracting release ${RELEASE_BUNDLE}"
-SLINGER_DIR=`mktemp -d -t slinger`
-tar -xz -C "${SLINGER_DIR}" -f "${RELEASE_BUNDLE}"
+SLINGER_DIR="slinger"
+mkdir -p ${SLINGER_DIR}
+tar -xzf "${RELEASE_BUNDLE}" -C "${SLINGER_DIR}" --strip-components 1
 
 # Find correct patch.
 SLACK_MD5=`md5 -q ${SLACK}`
