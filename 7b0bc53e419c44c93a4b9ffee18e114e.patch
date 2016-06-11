@@ -4,7 +4,7 @@
 0x00024b44 0x488d3d4524070031c0e880a40400 0x9090909090909090909090909090
 
 # Change string that is passed to `stringByEvaluatingJavaScriptFromString`.
-0x00024b76 0x488d1533240700 0x488d1513140700
+0x00024b76 0x488d1533240700 0x488d1513240700
 
 # Merge strings by replacing the separating \0 with a space, in case the
 # URL doesn't reach it.
