@@ -1,7 +1,6 @@
 (function(){
   'use strict';
-  // patch: 0x8032F => $.getScript('//rawgit.com/zachsnow/taut/master/taut.js') ;
-  //                   window.TSSSB ? TSSSB.teamsDidLoad() : '';
+
   var debug = true;
   var version = "0.0.1";
   var inApp = false;
@@ -9,6 +8,7 @@
     inApp = window.TSSSB.env.mac_ssb_version || window.TSSSB.env.win_ssb_version;
   }
 
+  // TODO: point this at `https://zachsnow.github.io/taut/taut.css`.
   var stylesUrl = '//rawgit.com/zachsnow/taut/master/taut.css';
   //var stylesUrl = '//localhost:4443/taut.css';
 
