@@ -2,7 +2,7 @@
   'use strict';
 
   var debug = true;
-  var version = "0.0.2";
+  var version = "0.1.0";
 
   // NOTE: use the following in development:
   // var stylesUrl = '//localhost:4443/src/slinger.css';
