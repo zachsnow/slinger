@@ -35,7 +35,7 @@ then
   exit -1
 fi
 
-# Fix code signing.
+# Re-sign with ad hoc identity.
 echo "Slinger: signing..."
 sudo codesign -f -s - "${SLACK}"
 if [ $? -ne 0 ];

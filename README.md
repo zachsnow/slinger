@@ -32,14 +32,28 @@ does only a few things.
 The easiest way to test development is to load `slinger.js` in the Slack
 webapp. Due to browsers and security and all of that nonsense, can't just
 load the file via `file:///`; instead you need to serve it (over `https`, of
-course).  First run the test server:
+course).  First run a server:
 
-    $ ./bin/serve.py
+    $ python -m SimpleHTTPServer
     
 Then load the script into the webapp by opening your console and enter the following:
 
-    $.getScript('https://localhost:4443/src/slinger.js');
+    $.getScript('http://localhost/src/slinger.js');
 
-Oh no, it doesn't work! Because `localhost.pem` is self-signed, you'll need
-to first load <https://localhost:4443/src/slinger.js> and tell your browser that it's safe.
-Probably you can add a certificate to your keychain or something, too.
+Oh no, it doesn't work! Because the web application is loaded over `https`, you need
+the `WebView` refuses to load an insecure resource. We can disable this by modifying
+the Slack `Info.plist`.  Add the following:
+
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <string>YES</string>
+    </dict>
+
+Now we've broken the signature for `Slack.app`, so we must re-sign it:
+
+    $ codesign -f -s - /Applications/Slack.app
+
+Now you should be able to load it locally. Sadly, I wasn't able to determine how to
+tell the `WebView` that it can load a local file without completely disabling web
+security.
