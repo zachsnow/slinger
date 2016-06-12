@@ -1,5 +1,5 @@
 # Get latest release.
-RELEASE_URL=`curl -s https://api.github.com/repos/zachsnow/slinger/releases | jq --raw-output '.[0].tarball_url'`
+RELEASE_URL=`curl -s https://api.github.com/repos/zachsnow/slinger/releases/latest | grep tarball_url | head -n 1 | cut -d '"' -f 4`
 RELEASE_BUNDLE="slinger.tar.gz"
 
 echo "slinger: downloading release ${RELEASE_URL}..."
