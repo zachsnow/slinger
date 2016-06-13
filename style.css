@@ -5,14 +5,13 @@ html {
 }
 
 body {
+    position: relative;
     overflow-x: hidden;
-    margin: 0 auto;
-    max-width: 620px;
-    padding: 20px 10px;
     font-size: 15px;
     font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
     line-height:1.6;
-    color:white;
+    margin: 0;
+    color: white;
 
     background: #78bbe7;
     background: -moz-linear-gradient(top,  #78bbe7 0%, #2e6ba6 100%);
@@ -21,6 +20,12 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#78bbe7', endColorstr='#2e6ba6',GradientType=0 );
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+#wrap {
+    margin: 0 auto;
+    max-width: 620px;
+    padding: 10px 10px;
 }
 
 h1, h2, h3{
