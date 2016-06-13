@@ -40,7 +40,7 @@
   </p>
   <pre>$ bash slinger.sh https://someotherdomain.com/some-other-script.js</pre>
   <p>
-    <b>Caveats:</b> the script <i>must</i> be served over HTTPS, with
+    <b>Caveats:</b> the script <b>must</b> be served over HTTPS, with
     a CA-signed certificate (otherwise the underlying <code>WebView</code>
     will not deign to load it). Furthermore the entire URL must be less than
     <code>80</code> characters long, because I'm not actually a reverse&nbsp;engineer.
@@ -61,7 +61,7 @@
     shortcuts, and so on.
   </p>
   <p class="note">
-    Of course, you don't <i>need</i> to patch the binary if you
+    Of course, you don't <b>need</b> to patch the binary if you
     don't want to; instead you can just open the web inspector (by right-clicking
     anywhere in the view while holding <code>&#8997; + &#8679;</code>) and enter the
     above code everytime you start Slack. But that's no fun!
