@@ -37,7 +37,7 @@ fi
 
 # Re-sign with ad hoc identity.
 echo "Slinger: signing..."
-sudo codesign -f -s - "${SLACK}"
+codesign -f -s - "${SLACK}"
 if [ $? -ne 0 ];
 then
   echo "slinger: re-signing Slack.app failed."
