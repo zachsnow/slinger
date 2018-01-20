@@ -2,10 +2,8 @@
   'use strict';
 
   var debug = true;
-  var version = "0.1.0";
+  var version = "0.2.0";
 
-  // NOTE: use the following in development:
-  // var stylesUrl = '//localhost:4443/src/slinger.css';
   var stylesUrl = '//zachsnow.github.io/slinger/slinger.css';
 
   // Because sometimes things break and you can't tell if the script
@@ -123,7 +121,7 @@
   // leave: leave the current room; like /leave but tries to verify
   // that you actually want to leave in some cases.
   var leave = function(){
-    var model = TS.shared.getActiveModelOb();
+    var model = TS.shared.legacyGetActiveModelOb();
     if(!model){
       log('leave: no active model');
       return;
@@ -151,37 +149,21 @@
 
   // Bind Command+W to leave, except when we're not really
   // in the Slack app.
-  TS.key_triggers[inApp ? 87 : 88] = {
-    func: leave,
-    no_shift: true
-  };
-
-  // startCall: try to start a call in your current room/channel/etc.
-  var startCall = function(){
-    var model = TS.shared.getActiveModelOb();
-    if(!model){
-      log('startCall: no active model');
-      return;
+  var bindings = {
+    87: {
+      func: leave,
+      no_shift: true
     }
-    var callInfo = {
-      id: model.id,
-      is_dm: model.is_im,
-      is_mpdm: model.is_mpim
-    };
-    log('startCall: launching...', callInfo)
-    TS.utility.calls.launchVideoCall(callInfo);
   };
 
-  // Bind Command+P to startCall.
-  TS.key_triggers[80] = {
-    func: startCall,
-    no_shift: true
+  var getFromCode = TS.key_triggers.getFromCode;
+  TS.key_triggers.getFromCode = function t(i){
+    var ii = TS.interop.i18n.keyCodeEquivalent(i, {useReverseMap:true}).toString();
+    var binding = bindings[ii];
+    return binding || getFromCode(i);
   };
 
   log('loaded');
-
-  // Ok, we're done.
-  window.TSSSB.teamsDidLoad && window.TSSSB.teamsDidLoad();
 
   // Export.
   window.slinger = {
