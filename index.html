@@ -41,8 +41,8 @@
   <p>
     This patches <code>Slack.app</code> to load
     <a href="https://zachsnow.github.io/slinger/slinger.js">slinger.js</a>, a simple
-    user script that adds that missing shortcut (as well as a visible log and console,
-    for fun).
+    user script that adds that missing shortcut (and allows access to the Developer Tools,
+    too).
   </p>
   <p>
     If you'd prefer, you can patch Slack to load whatever user script you'd
@@ -53,29 +53,23 @@
   <p>
     <b>Caveats:</b> the script <b>must</b> be served over HTTPS, with
     a CA-signed certificate (otherwise the underlying <code>WebView</code>
-    will not deign to load it). Furthermore the entire URL must be less than
-    <code>80</code> characters long, because I'm not actually a reverse&nbsp;engineer.
+    will not deign to load it).
   </p>
 
   <h2>No, But How?</h2>
   <p>
-    <code>Slack.app</code> is a <code>WebView</code> that loads
-    the Slack web application, so we just patch the binary to run some Javascript in
-    the context of the view. The binary already has multiple calls to a <code>WebView</code>
-    method for doing just that: <code>stringByEvaluatingJavaScriptFromString</code>.
-    Instead of shoe-horning in an additional call, we re-use an existing one, replacing
-    the intended string with the following:
-  </p>
-  <pre>$.getScript('https://zachsnow.github.io/slinger/slinger.js');</pre>
+    <code>Slack.app</code> is an <code>WebView</code> that loads
+    the Slack web application, so we just patch it to run some Javascript in
+    the context of the view.
   <p>
     That script then loads additional styles, adds elements to the page, binds keyboard
     shortcuts, and so on.
   </p>
   <p class="note">
-    Of course, you don't <b>need</b> to patch the binary if you
-    don't want to; instead you can just open the web inspector (by right-clicking
-    anywhere in the view while holding <code>&#8997; + &#8679;</code>) and enter the
-    above code everytime you start Slack. But that's no fun!
+    Of course, you don't <b>need</b> to patch the app if you
+    don't want to; instead you can just open the web inspector (by
+    running Slack with the <code>--dev</code> command-line option)
+    and enter the above code everytime you start Slack. But that's no fun!
   </p>
 
   <footer>
