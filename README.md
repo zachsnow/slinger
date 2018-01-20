@@ -1,11 +1,25 @@
 Slinger - A Slack Thinger
 =========================
 
-# NOTE: this does not work with recent versions of Slack!
-
 User scripts and stylesheets for `Slack.app`.
 
+# This is mostly unnecessary for new versions of Slack.
+
+First off: there's no real need to patch the app if you don't want to; simply
+run `/Slack.app/Contents/MacOS/Slack --dev` and to enable Developer Tools. Then
+click View > Developer > Toggle Webapp DevTools to open them. Finally, you can
+load whatever JS or CSS you like:
+
+    $.getScript("https://example.com/my-neat-script.js");
+
+Minor caveat: the script *must* be served via `https`.
+
+However, if you want Slack load your user scripts and stylesheets every time you
+open the app or join a new workspace, you can patch `Slack.app` to do just that.
+
 ## Installation
+
+**NOTE:** The following is out of date for new versions of Slack!
 
     $ ./bin/patch.sh
 
