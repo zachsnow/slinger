@@ -19,12 +19,12 @@ open the app or join a new workspace, you can patch `Slack.app` to do just that.
 
 ## Installation
 
-**NOTE: this approach to patching is out of date for new versions of Slack!**
-
     $ ./bin/patch.sh
 
-This will patch `Slack.app` to load <https://zachsnow.github.io/slinger/slinger.js>;
-if you'd prefer you can patch it to load any script you'd like. Assuming it is hosted
+This will patch `Slack.app` to load <https://zachsnow.github.io/slinger/slinger.js>.
+
+**NOTE: the following is currently broken:**
+If you'd prefer you can patch it to load any script you'd like. Assuming it is hosted
 at `$URL`:
 
     $ ./bin/patch.sh $URL
@@ -38,10 +38,10 @@ Start Slack. That's it :)
 The default user script, [slinger.js](https://zachsnow.github.io/slinger/slinger.js),
 does only a few things.
 
-* It binds two additional shortcuts: `Command + W`, to close the current channel,
-  and `Command + P`, to start a call in the current channel.
-* It creates a simple Javascript console that is running in the context of the Slack
-  `WebView`.
+* It binds an additional shortcut: `Command + W`, to close the current channel,
+  direct message, group, etc.
+* It creates a little tiny [Slinger](https://zachsnow.github.io/slinger/) link in
+  the lower left corner of the app, for fun.
 
 ## Development
 
@@ -55,6 +55,6 @@ Then load the script into the webapp by opening your console and enter the follo
 
     $.getScript('http://localhost:8000/src/slinger.js');
 
-Oh no, it doesn't work because security! If you are running Chrome, you
+Oh no, it doesn't work, because security! If you are running Chrome, you
 can temporarily disable the Mixed Content error with the `--allow-running-insecure-content`
 command line argument.
