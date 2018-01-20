@@ -1,6 +1,8 @@
 Slinger - A Slack Thinger
 =========================
 
+# NOTE: this does not work with recent versions of Slack!
+
 User scripts and stylesheets for `Slack.app`.
 
 ## Installation
@@ -40,7 +42,7 @@ Then load the script into the webapp by opening your console and enter the follo
 
     $.getScript('http://localhost/src/slinger.js');
 
-Oh no, it doesn't work! Because the web application is loaded over `https`, you need
+Oh no, it doesn't work! Because the web application is loaded over `https`,
 the `WebView` refuses to load an insecure resource. We can disable this by modifying
 the Slack `Info.plist`.  Add the following:
 
