@@ -17,7 +17,7 @@ ASAR_MD5=`md5 -q ${ASAR}`
 PATCH="${SLINGER_DIR}/patches/${ASAR_MD5}.patch"
 if [ ! -f "${PATCH}" ]; then
   echo "slinger: no patch file for your version of Slack.app asar (md5: ${ASAR_MD5})."
-  PATCH="/Users/z/Projects/ZachSnow/git/slinger/patches/fad2b241e8882507e4f359bf42f83697.patch"
+  exit -1
 fi
 echo "slinger: found path ${PATCH}"
 
