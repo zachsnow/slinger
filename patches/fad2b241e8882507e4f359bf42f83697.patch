@@ -1,5 +1,13 @@
 # Beta 3.0.5 (Around The World)
+
+# Turn on Developer Tools.
 FILE=".cache/4427adb5b95da39888441f84d12782c4b3076059/d7deafc67b469dd09504d8dbd2dc395a79430272"
 gunzip < ${FILE} > ${FILE}.tmp
-sed -i '' -e 's|if (this.state.isDevMode)|if (true)|' ${FILE}.tmp
+sed -i '' -e 's/if (this.state.isDevMode)/if (true)/' ${FILE}.tmp
+gzip < ${FILE}.tmp > ${FILE}
+
+# Load a script.
+FILE=".cache/4427adb5b95da39888441f84d12782c4b3076059/5b203374ecf4ed3b49e0be522c950002718d08a4"
+gunzip < ${FILE} > ${FILE}.tmp
+sed -i '' -e 's/global.browserWindowId = this.mainWindow.id;/global.browserWindowId = this.mainWindow.id; this.mainWindow.$.getScript("https://zachsnow.github.io/slinger/slinger.js");/' ${FILE}.tmp
 gzip < ${FILE}.tmp > ${FILE}
