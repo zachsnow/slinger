@@ -1,6 +1,8 @@
 Slinger - A Slack Thinger
 =========================
 
+**I can't imagine this is anywhere close to working anymore. Adios.**
+
 User scripts and stylesheets for `Slack.app`.
 
 **NOTE:** there's no real need to patch the app if you don't want to; simply
